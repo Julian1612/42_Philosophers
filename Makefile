@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
-#    Updated: 2022/10/15 15:34:45 by jschneid         ###   ########.fr        #
+#    Updated: 2022/10/16 19:26:25 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 FLAGS = -Wall -Werror -Wextra -pthread
 
-SRC = main.c
+SRC = main.c parsing_00.c utils_00.c
 
 CC = gcc -g
 
@@ -28,7 +28,7 @@ all: $(NAME)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) -o ./philo/$(NAME)
+	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "$(YELLOW)Executable created"
 	@echo "$(GREEN)$(FETT)Make done$(RESET)"
 
@@ -38,7 +38,7 @@ clean:
 	@echo "$(GREEN)$(FETT)Make clean done$(RESET)"
 
 fclean: clean
-	@/bin/rm -f ./philo/$(NAME)
+	@/bin/rm -f $(NAME)
 	@echo "$(YELLOW)Executable deleted"
 	@echo "$(GREEN)$(FETT)Make fclean done$(RESET)"
 
@@ -46,7 +46,7 @@ re: fclean all
 	@echo "$(GREEN)$(FETT)Make re done$(RESET)"
 
 ex: all
-	./philo/philo
+	./philo 2 3 4 5
 
 .PHONY:	all bonus clean fclean re lib
 
