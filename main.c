@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:30:48 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/17 19:12:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:06:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int	main(int argc, char *argv[])
 		j++;
 	}
 	pthread_mutex_destroy(&mutex);
+	free(arr);
+	free(th);
 	return (0);
 }
