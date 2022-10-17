@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
-#    Updated: 2022/10/16 19:26:25 by jschneid         ###   ########.fr        #
+#    Updated: 2022/10/16 19:46:44 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	@echo "$(BLUE)$(FETT)-_-COMPILING-_-$(RESET)"
 	@echo "\033[1;32mCompiling  \033[1;97m$< \033[1;0m"
 	@$(CC) $(FLAGS) -c $< -o $@
 
