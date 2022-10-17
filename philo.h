@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/17 16:10:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:24:48 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ typedef struct s_info {
 	t_philo	*philo;
 }	t_info;
 
-
 int		ft_atoi(const char *nptr);
 int		*initialize_forks(t_philo *var);
 int		input_check(int argc, char *argv[]);
 void	initialize_variable(t_philo *var, int argc, char *argv[]);
-void	initialize_struct(t_info *var);
+void	initialize_struct(t_info *arr, t_philo *var, int i);
 void	*philo_schedule(void *v);
 
 #endif
