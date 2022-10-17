@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:11:34 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/17 16:02:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:53:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,25 @@ void	initialize_variable(t_philo *var, int argc, char *argv[])
 	var->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		var->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-	var->forks_arr = initialize_forks(var);
+	initialize_forks(var);
 }
 
-int	*initialize_forks(t_philo *var)
+int	initialize_forks(t_philo *var)
 {
-	int		*arr;
+	var->forks_arr = malloc(sizeof(int *) * var->number_of_philosophers);
+	if (var->forks_arr == NULL)
+		return (1);
+	memset(var->forks_arr, 0, var->number_of_philosophers * sizeof (int *));
+	return (0);
+}
 
-	arr = malloc(sizeof(int *) * var->number_of_philosophers);
-	if (arr == NULL)
-		return (NULL);
-	memset(arr, 0, var->number_of_philosophers * sizeof (int *));
-	return (arr);
+void	initialize_struct(t_info *arr, t_philo *var, int i)
+{
+	(void) var;
+	arr->philo_id = i + 1;
+	arr->fork_right = i;
+	if (i == 0)
+		arr->fork_left = var->number_of_philosophers - 1;
+	else
+		arr->fork_left = i - 1;
 }

@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
-#    Updated: 2022/10/16 19:46:44 by jschneid         ###   ########.fr        #
+#    Updated: 2022/10/17 17:47:58 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 FLAGS = -Wall -Werror -Wextra -pthread
 
-SRC = main.c parsing_00.c utils_00.c
+SRC = main.c parsing_00.c utils_00.c routine_00.c
 
 CC = gcc -g
 
