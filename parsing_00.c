@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:11:34 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/17 17:53:24 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:41:19 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ void	initialize_variable(t_philo *var, int argc, char *argv[])
 
 int	initialize_forks(t_philo *var)
 {
-	var->forks_arr = malloc(sizeof(int *) * var->number_of_philosophers);
-	if (var->forks_arr == NULL)
+	var->arr_mutex_fork = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * var->number_of_philosophers);
+	if (var->arr_mutex_fork == NULL)
 		return (1);
-	memset(var->forks_arr, 0, var->number_of_philosophers * sizeof (int *));
 	return (0);
 }
 
 void	initialize_struct(t_info *arr, t_philo *var, int i)
 {
-	(void) var;
+	arr->philo = var;
 	arr->philo_id = i + 1;
-	arr->fork_right = i;
+	arr->fork_right = &var->arr_mutex_fork[i];
 	if (i == 0)
-		arr->fork_left = var->number_of_philosophers - 1;
+		arr->fork_left = &var->arr_mutex_fork[var->number_of_philosophers - 1];
 	else
-		arr->fork_left = i - 1;
+		arr->fork_left = &var->arr_mutex_fork[i - 1];
+	pthread_mutex_init(arr->fork_left, NULL);
 }
