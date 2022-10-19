@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/19 13:56:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:15:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int		start_eating(t_info var);
 int		start_sleeping(t_info var);
 int		start_thinking(t_info var);
 int		put_down_forks(t_info var);
+int		time_ms(void);
 
 #endif

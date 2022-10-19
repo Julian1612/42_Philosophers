@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:30:48 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/19 13:37:58 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:22:02 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	main(int argc, char *argv[])
 	pthread_t		*th;
 	t_philo			var;
 	t_info			*arr;
+	struct timeval	current_time;
 
+	gettimeofday(&current_time, NULL);
 	if (input_check(argc, argv) == 1)
 		return (1);
 	initialize_variable(&var, argc, argv);
@@ -36,6 +38,7 @@ int	main(int argc, char *argv[])
 	while (i < var.number_of_philosophers)
 	{
 		initialize_struct(&arr[i], &var, i);
+		var.time = time_ms();
 		if (pthread_create(th + i, NULL, &philo_schedule, &arr[i]) != 0)
 			return (1);
 		if (i + 1 == var.number_of_philosophers)
