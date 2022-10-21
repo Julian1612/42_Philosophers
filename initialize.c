@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 10:07:27 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/21 11:52:16 by jschneid         ###   ########.fr       */
+/*   Created: 2022/10/21 11:49:00 by jschneid          #+#    #+#             */
+/*   Updated: 2022/10/21 11:52:03 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	init_forks(t_info *info)
 {
-	t_info	*info;
-	t_philo	*philo;
-
-	if (input_check(argc, argv))
+	info->forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * info->nbr_philos);
+	if (info->nbr_philos == NULL)
+	{
+		printf("Error!\n init_forks()");
 		return (-1);
-	if (init_forks(info))
-		return (-1);
-
+	}
+	return (0);
 }
