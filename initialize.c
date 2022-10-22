@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/22 12:09:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:22:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ t_info	*init_info(int argc, char **argv)
 	info->die = 0;
 	info->created_threads = 0;
 	info->time_start = 0;
+	pthread_mutex_init(&info->print_lock, NULL);
+	pthread_mutex_init(&info->fed_up_lock, NULL);
+	pthread_mutex_init(&info->wait_lock, NULL);
 	return (info);
 }
 
@@ -49,10 +52,12 @@ void	init_philo(t_info *info, t_philo *philo, int i)
 {
 	philo->info = info;
 	philo->philo_id = i + 1;
+	philo->meal_counter = 0;
+	philo->last_meal = 0;
 	philo->fork_right = &info->forks[i];
 	if (i == 0)
 		philo->fork_left = &info->forks[info->nbr_philos - 1];
 	else
 		philo->fork_left = &info->forks[i - 1];
-	pthread_mutex_init(philo->fork_right, NULL);
+	pthread_mutex_init(philo->fork_left, NULL);
 }

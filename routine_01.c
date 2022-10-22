@@ -6,40 +6,28 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:53:32 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/22 13:54:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:04:52 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	start_sleeping(t_info var)
+int	start_sleeping(t_philo *philo)
 {
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
-	usleep(var.philo->time_to_sleep);
-	printf("%dms	%d is sleeping\n",
-		time_ms() - var.philo->time, var.philo_id);
+	print_message('S', philo);
+	my_sleep(philo->info->time_sleep, philo->info->nbr_philos);
 	return (0);
 }
 
-int	start_thinking(t_info var)
+int	start_thinking(t_philo *philo)
 {
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
-	printf("%dms	%d is thinking\n",
-		time_ms() - var.philo->time, var.philo_id);
+	print_message('T', philo);
 	return (0);
 }
 
-int	put_down_forks(t_info var)
+int	put_down_forks(t_philo *philo)
 {
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
-	pthread_mutex_unlock(var.fork_left);
-	pthread_mutex_unlock(var.fork_right);
-	var.last_time_eaten = current_time.tv_usec;
+	pthread_mutex_unlock(philo->fork_left);
+	pthread_mutex_unlock(philo->fork_right);
 	return (0);
 }
