@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/21 11:07:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/22 13:31:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,28 @@ typedef struct s_philo {
 	pthread_t		thread;
 	int				philo_id;
 	int				meal_counter;
-	unsigned long	time_last_meal;
+	unsigned long	last_meal;
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
-	t_info			*philo;
+	t_info			*info;
 }	t_philo;
 
-int	ft_atoi(const char *nptr);
-int	input_check(int argc, char **argv);
+//---------------initialize---------------//
+int		init_forks(t_info *info);
+t_info	*init_info(int argc, char **argv);
+void	init_philo(t_info *info, t_philo *philo, int i);
+
+//----------------parsing----------------//
+int		input_check(int argc, char **argv);
+
+//----------------threads----------------//
+int		create_threads(t_info *info);
+
+//-----------------utils-----------------//
+int		ft_atoi(const char *nptr);
+int		time_ms(void);
+
+//----------------routine----------------//
+void	*routine(void *v);
 
 #endif
