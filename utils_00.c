@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 19:25:10 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/22 18:24:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/23 15:17:36 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	print_message(char c, t_philo *philo)
 	unsigned long	time;
 	int				id;
 
+	pthread_mutex_lock(&philo->info->print_lock);
 	time = philo->info->time_start - time_ms();
 	id = philo->philo_id;
 	if (c == 'F')
@@ -79,4 +80,5 @@ void	print_message(char c, t_philo *philo)
 		printf("%lu    ms %d is thinking\n", time, id);
 	else if (c == 'D')
 		printf("%lu    ms %d died\n", time, id);
+	pthread_mutex_unlock(&philo->info->print_lock);
 }

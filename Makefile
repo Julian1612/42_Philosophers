@@ -1,59 +1,64 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
-#    Updated: 2022/10/22 16:50:15 by jschneid         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#  |  |  ___ \    \  |         |
+#  |  |     ) |  |\/ |   _  |  |  /   _ 
+# ___ __|  __/   |   |  (   |    <    __/ 
+#    _|  _____| _|  _| \__,_| _|\_\ \___|
+#                              by jcluzet
+################################################################################
+#                                     CONFIG                                   #
+################################################################################
 
-NAME = philo
+NAME        := philo
+CC        := gcc
+FLAGS    := -Wall -Wextra -Werror 
+################################################################################
+#                                 PROGRAM'S SRCS                               #
+################################################################################
 
-FLAGS = -Wall -Werror -Wextra -pthread
+SRCS        :=      initialize.c \
+                          main.c \
+                          parsing_00.c \
+                          routine_00.c \
+                          routine_01.c \
+                          threads.c \
+                          utils_00.c \
+                          
+OBJS        := $(SRCS:.c=.o)
 
-SRC = main.c parsing_00.c utils_00.c initialize.c threads.c routine_00.c routine_01.c
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-CC = gcc -g
+################################################################################
+#                                  Makefile  objs                              #
+################################################################################
 
-OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
+CLR_RMV		:= \033[0m
+RED		    := \033[1;31m
+GREEN		:= \033[1;32m
+YELLOW		:= \033[1;33m
+BLUE		:= \033[1;34m
+CYAN 		:= \033[1;36m
+RM		    := rm -f
 
-%.o: %.c
-	@echo "\033[1;32mCompiling  \033[1;97m$< \033[1;0m"
-	@$(CC) $(FLAGS) -c $< -o $@
+${NAME}:	${OBJS}
+			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			${CC} ${FLAGS} -o ${NAME} ${OBJS}
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
-$(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
-	@echo "$(YELLOW)Executable created"
-	@echo "$(GREEN)$(FETT)Make done$(RESET)"
+all:		${NAME}
+
+bonus:		all
 
 clean:
-	@/bin/rm -f $(OBJ)
-	@echo "$(YELLOW)Objectfiles deleted"
-	@echo "$(GREEN)$(FETT)Make clean done$(RESET)"
+			@ ${RM} *.o */*.o */*/*.o
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
-fclean: clean
-	@/bin/rm -f $(NAME)
-	@echo "$(YELLOW)Executable deleted"
-	@echo "$(GREEN)$(FETT)Make fclean done$(RESET)"
+fclean:		clean
+			@ ${RM} ${NAME}
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
-re: fclean all
-	@echo "$(GREEN)$(FETT)Make re done$(RESET)"
+re:			fclean all
 
-ex: all
-	./philo 2 3 4 5
+.PHONY:		all clean fclean re
 
-.PHONY:	all bonus clean fclean re lib
-
-# text modifiers #
-RED		=	\033[31m
-GREEN	=	\033[32m
-YELLOW	=	\033[33m
-BLUE	=	\033[34m
-RESET	=	\033[0m
-FETT	=	\033[1m
 
