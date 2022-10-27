@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/22 18:22:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:29:14 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "./../philo.h"
 
 int	init_forks(t_info *info)
 {
@@ -27,7 +27,7 @@ t_info	*init_info(int argc, char **argv)
 {
 	t_info	*info;
 
-	info = (t_info *) malloc(sizeof(t_info));
+	info = malloc(sizeof(t_info));
 	if (info == NULL)
 		return (NULL);
 	info->nbr_philos = ft_atoi(argv[1]);
@@ -36,6 +36,8 @@ t_info	*init_info(int argc, char **argv)
 	info->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		info->max_meals = ft_atoi(argv[5]);
+	else
+		info->max_meals = INT_MAX;
 	info->philos_init = 0;
 	info->wait_flag = 0;
 	info->fed_up = 0;

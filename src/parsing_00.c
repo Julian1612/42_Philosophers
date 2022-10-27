@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_00.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:58:02 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/21 11:27:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:29:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "./../philo.h"
 
 int	input_check(int argc, char **argv)
 {

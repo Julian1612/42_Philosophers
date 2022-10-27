@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_00.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 19:25:10 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/23 15:17:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:29:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "./../philo.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -45,19 +45,19 @@ unsigned long	time_ms(void)
 	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
 }
 
-void	my_sleep(unsigned long time, int nbr_philos)
+void	my_sleep(t_philo *philo)
 {
 	unsigned long	start_time;
 
 	start_time = time_ms();
-	if (nbr_philos > 50)
+	if (philo->info->nbr_philos > 50)
 	{
-		while ((start_time + time > time_ms()))
+		while ((start_time + philo->info->time_eat) > time_ms())
 			usleep(200);
 	}
 	else
 	{
-		while ((start_time + time > time_ms()))
+		while ((start_time + philo->info->time_eat) > time_ms())
 			usleep(50);
 	}
 }
