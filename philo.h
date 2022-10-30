@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/26 17:02:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:55:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_info {
 typedef struct s_philo {
 	int				philo_id;			//	ID of the Philo
 	int				meal_counter;		//	Eaten meals form philo
-	unsigned long	last_meal;			//	Time of the last meal of philo
+	unsigned long	meal_timer;		 	//	Time of the last meal of philo
+	pthread_t		thread;				//	idk
 	pthread_mutex_t	*fork_right;		//	The fork on the right side of the philo
 	pthread_mutex_t	*fork_left;			//	The fork on the left side of the philo
 	t_info			*info;				//	Link to the other info struct with the general informations
@@ -51,6 +52,10 @@ typedef struct s_philo {
 int				init_forks(t_info *info);
 t_info			*init_info(int argc, char **argv);
 void			init_philo(t_info *info, t_philo *philo, int i);
+//-------------join_destroy--------------//
+void			destroy_threads(t_philo *philo);
+void			join_threads(t_philo *philo);
+void			free_structs(t_philo *philo, t_info *info);
 //----------------Parsing----------------//
 int				input_check(int argc, char **argv);
 //----------------Threads----------------//
@@ -58,16 +63,16 @@ int				create_threads(t_info *info, t_philo *philo);
 //--------------Routine_00--------------//
 void			*routine(void *v);
 void			philo_schedule(t_philo *philo);
-void			start_eating(t_philo *philo);
+void			philo_eat(t_philo *philo);
 //--------------Routine_01--------------//
-void			start_sleeping(t_philo *philo);
-void			start_thinking(t_philo *philo);
+void			philo_sleep(t_philo *philo);
+void			philo_think(t_philo *philo);
 //--------------Thread_check--------------//
 void			thread_checker(t_philo *philo);
 //-----------------Utils-----------------//
 int				ft_atoi(const char *nptr);
 unsigned long	time_ms(void);
-void			my_sleep(t_philo *philo);
+void			my_usleep(unsigned long time, int nbr_philo);
 void			print_message(char c, t_philo *philo);
 
 #endif
