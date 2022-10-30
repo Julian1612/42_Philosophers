@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/27 12:29:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:51:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_philo(t_info *info, t_philo *philo, int i)
 	philo->info = info;
 	philo->philo_id = i + 1;
 	philo->meal_counter = 0;
-	philo->last_meal = 0;
+	philo->meal_timer = 0;
 	philo->fork_right = &info->forks[i];
 	if (i == 0)
 		philo->fork_left = &info->forks[info->nbr_philos - 1];

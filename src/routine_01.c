@@ -6,24 +6,19 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:53:32 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/27 12:29:30 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/27 20:24:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../philo.h"
 
-void	start_sleeping(t_philo *philo)
+void	philo_sleep(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->info->print_lock);
 	print_message('S', philo);
-	pthread_mutex_unlock(&philo->info->print_lock);
-	my_sleep(philo);
-
+	my_usleep(philo->info->time_sleep, philo->info->nbr_philos);
 }
 
-void	start_thinking(t_philo *philo)
+void	philo_think(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->info->print_lock);
 	print_message('T', philo);
-	pthread_mutex_unlock(&philo->info->print_lock);
 }

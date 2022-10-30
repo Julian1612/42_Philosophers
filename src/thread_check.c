@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:46:44 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/27 12:44:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:51:55 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,22 @@ void	thread_checker(t_philo *philo)
 	i = 0;
 	while (1)
 	{
-		if (philo[i].meal_counter == philo->info->max_meals)
+		if (philo[i].info->fed_up == philo->info->nbr_philos)
 		{
-			pthread_mutex_lock(&philo->info->fed_up_lock);
-			philo->info->die++;
-			pthread_mutex_unlock(&philo->info->fed_up_lock);
-
+			printf("All Philosophers are fed up\n");
+			return ;
 		}
+		if (time_ms()
+			> philo[i].meal_timer + philo[i].info->time_die)
+		{
+			philo[i].info->die = 1;
+			print_message('D', &philo[i]);
+			pthread_mutex_unlock(&philo[i].info->print_lock);
+			return ;
+		}
+		if (i == philo[0].info->nbr_philos - 1)
+			i = 0;
+		if (philo[0].info->nbr_philos != 1)
+			i++;
 	}
-	i++;
 }

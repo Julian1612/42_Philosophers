@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:07:27 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/27 12:29:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:56:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,15 @@ int	main(int argc, char **argv)
 	info = init_info(argc, argv);
 	if (info == NULL)
 		return (-1);
-	philo = malloc(sizeof(t_philo) * info->nbr_philos);
+	philo = (t_philo *) malloc(sizeof(t_philo) * info->nbr_philos);
 	if (philo == NULL)
 		return (-1);
 	if (create_threads(info, philo))
 		return (-1);
 	thread_checker(philo);
-	//if(join_threads())
-		// return (-1);
-	//if(destroy_threads())
-		// return (-1);
-	//if(free_struct())
-		// return (-1);
+	join_threads(philo);
+	destroy_threads(philo);
+	free_structs(philo, info);
+	system("leaks philo");
 	return (0);
 }
