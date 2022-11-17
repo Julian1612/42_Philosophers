@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:07:27 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/28 12:56:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:53:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	main(int argc, char **argv)
 	join_threads(philo);
 	destroy_threads(philo);
 	free_structs(philo, info);
-	system("leaks philo");
+	// system("leaks philo");
 	return (0);
 }

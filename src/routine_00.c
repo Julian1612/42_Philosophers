@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_00.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:27:28 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/28 09:51:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:52:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	philo_eat(t_philo *philo)
 	print_message('F', philo);
 	if (philo->info->nbr_philos == 1)
 	{
-		my_usleep(philo->info->time_eat, philo->info->nbr_philos);
+		my_usleep((philo->info->time_eat * 10), philo->info->nbr_philos);
 		return ;
 	}
 	pthread_mutex_lock(philo->fork_left);

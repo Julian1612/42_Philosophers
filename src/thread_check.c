@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:46:44 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/28 09:51:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:55:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	thread_checker(t_philo *philo)
 		if (time_ms()
 			> philo[i].meal_timer + philo[i].info->time_die)
 		{
-			philo[i].info->die = 1;
 			print_message('D', &philo[i]);
+			philo[i].info->die = 1;
 			pthread_mutex_unlock(&philo[i].info->print_lock);
 			return ;
 		}
