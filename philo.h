@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/28 12:55:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:07:49 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,31 @@
 # include <limits.h>
 
 typedef struct s_info {
-	int				nbr_philos;			//	Number of Philosophers on the table
-	int				time_die;			//	Time a philosopher must die when he haven't ate
-	int				time_eat;			//	Zeit wie lange gegessen werden soll
-	int				time_sleep;			//	Zeit wie lange geschlafen werden soll
-	int				max_meals;			//	Anzahl wie viele Mahlzeiten die Philos essen sollen
-	int				philos_init;		//	Gives the signal that all philos are initzialied (when > 0)
-	int				wait_flag;			//	Gives the Sig
-	int				fed_up;				//	flag wenn ein philo aufgegessen hat
-	int				die;				//	flag for all philo to die instantly
-	int				created_threads;	//	-
-	unsigned long	time_start;			//	Start time of all threads
-	pthread_mutex_t	*forks;				//	Array wich displays the forks on the table
-	pthread_mutex_t	print_lock;			//	Print lock that only one philo can print
-	pthread_mutex_t	fed_up_lock;		//
-	pthread_mutex_t	wait_lock;			//
+	int				nbr_philos;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				max_meals;
+	int				philos_init;
+	int				wait_flag;
+	int				fed_up;
+	int				die;
+	int				created_threads;
+	unsigned long	time_start;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_lock;
+	pthread_mutex_t	fed_up_lock;
+	pthread_mutex_t	wait_lock;
 }	t_info;
 
 typedef struct s_philo {
-	int				philo_id;			//	ID of the Philo
-	int				meal_counter;		//	Eaten meals form philo
-	unsigned long	meal_timer;		 	//	Time of the last meal of philo
-	pthread_t		thread;				//	idk
-	pthread_mutex_t	*fork_right;		//	The fork on the right side of the philo
-	pthread_mutex_t	*fork_left;			//	The fork on the left side of the philo
-	t_info			*info;				//	Link to the other info struct with the general informations
+	int				philo_id;
+	int				meal_counter;
+	unsigned long	meal_timer;
+	pthread_t		thread;
+	pthread_mutex_t	*fork_right;
+	pthread_mutex_t	*fork_left;
+	t_info			*info;
 }	t_philo;
 
 //---------------Initialize---------------//

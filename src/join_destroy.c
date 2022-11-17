@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_destroy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:38:16 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/28 12:57:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:05:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	join_threads(t_philo *philo)
 		}
 		i++;
 	}
-
 }
 
 void	destroy_threads(t_philo *philo)
@@ -49,5 +48,4 @@ void	free_structs(t_philo *philo, t_info *info)
 	free(info->forks);
 	free(philo);
 	free(info);
-
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:27:28 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/17 15:52:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:19:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*routine(void *v)
 	}
 	pthread_mutex_unlock(&philo->info->wait_lock);
 	philo->meal_timer = time_ms();
-	if (philo->philo_id % 2 == 0)
+	if (philo->philo_id % 2 != 0)
 		my_usleep(philo->info->time_eat / 2, philo->info->nbr_philos);
 	philo_schedule(philo);
 	return (NULL);
