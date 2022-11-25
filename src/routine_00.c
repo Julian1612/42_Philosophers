@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:27:28 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/17 17:19:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:27:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	*routine(void *v)
 		while (philo->info->philos_init != 1)
 			continue ;
 		philo->info->wait_flag = 1;
-		philo->info->time_start = time_ms();
+		pthread_mutex_lock(&philo->info->eat_lock);
+		philo->meal_timer = time_ms();
+		pthread_mutex_unlock(&philo->info->eat_lock);
 	}
 	pthread_mutex_unlock(&philo->info->wait_lock);
 	philo->meal_timer = time_ms();
@@ -67,7 +69,9 @@ void	philo_eat(t_philo *philo)
 	print_message('F', philo);
 	print_message('E', philo);
 	philo->meal_counter++;
+	pthread_mutex_lock(&philo->info->eat_lock);
 	philo->meal_timer = time_ms();
+	pthread_mutex_unlock(&philo->info->eat_lock);
 	my_usleep(philo->info->time_eat, philo->info->nbr_philos);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);

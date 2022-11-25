@@ -1,65 +1,61 @@
-#**************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/27 12:34:30 by jschneid          #+#    #+#              #
-#    Updated: 2022/10/27 12:34:30 by jschneid         ###   ########.fr        #
+#    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
+#    Updated: 2022/11/24 16:04:41 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:=	philo
-CC		:=	gcc
-FLAGS	:=	-Wall -Wextra -Werror -pthread
-RM		:=	rm -f
-RMDIR	:=	rm -rf
+NAME = philo
 
-SRCS	:=	./src/initialize.c \
-			./src/main.c \
-			./src/parsing_00.c \
-			./src/routine_00.c \
-			./src/routine_01.c \
-			./src/threads.c \
-			./src/utils_00.c \
-			./src/thread_check.c \
-			./src/join_destroy.c \
+FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread
 
-OBJS	:=	$(SRCS:.c=.o)
+SRC = ./src/main.c ./src/initialize.c ./src/join_destroy.c \
+./src/parsing_00.c ./src/threads.c ./src/utils_00.c \
+./src/routine_00.c ./src/routine_01.c ./src/thread_check.c \
 
-.c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+CC = gcc -g
 
-CLR_RMV	:=	\033[0m
-RED		:=	\033[1;31m
-GREEN	:=	\033[1;32m
-YELLOW	:=	\033[1;33m
-BLUE	:=	\033[1;34m
-CYAN 	:=	\033[1;36m
+OBJ = $(SRC:.c=.o)
 
-${NAME}:	${OBJS}
-			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			mkdir ./philo
-			${CC} ${FLAGS} -o ./philo/${NAME} ${OBJS}
-			@echo "$(GREEN)$(NAME) created[0m ✔️"
+all: $(NAME)
 
-all:		${NAME}
+%.o: %.c
+	@echo "$(BLUE)$(FETT)-_-COMPILING-_-$(RESET)"
+	@echo "\033[1;32mCompiling  \033[1;97m$< \033[1;0m"
+	@$(CC) $(FLAGS) -c $< -o $@
 
-bonus:		all
+$(NAME): $(OBJ)
+	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	@echo "$(YELLOW)Executable created"
+	@echo "$(GREEN)$(FETT)Make done$(RESET)"
 
 clean:
-			@ ${RMDIR} philo
-			@ ${RM} *.o */*.o */*/*.o
-			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
+	@/bin/rm -f $(OBJ)
+	@echo "$(YELLOW)Objectfiles deleted"
+	@echo "$(GREEN)$(FETT)Make clean done$(RESET)"
 
-fclean:		clean
-			@ ${RM} ${NAME}
-			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
+fclean: clean
+	@/bin/rm -f $(NAME)
+	@echo "$(YELLOW)Executable deleted"
+	@echo "$(GREEN)$(FETT)Make fclean done$(RESET)"
 
-re:			fclean all
+re: fclean all
+	@echo "$(GREEN)$(FETT)Make re done$(RESET)"
 
-val:
-	docker run -ti -v $(PWD):/test memory-test:0.1 bash -c "cd /test/; gcc -pthread $(SOURCES) -o main && valgrind --leak-check=full ./main 2 500 200 200 5; rm -f ./main"
+ex: all
+	./philo/philo
 
-.PHONY:		all clean fclean re
+.PHONY:	all bonus clean fclean re lib
+
+# text modifiers #
+RED		=	\033[31m
+GREEN	=	\033[32m
+YELLOW	=	\033[33m
+BLUE	=	\033[34m
+RESET	=	\033[0m
+FETT	=	\033[1m

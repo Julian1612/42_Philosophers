@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:46:44 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/17 15:55:24 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:47:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	thread_checker(t_philo *philo)
 			printf("All Philosophers are fed up\n");
 			return ;
 		}
+		pthread_mutex_lock(&philo->info->eat_lock);
 		if (time_ms()
 			> philo[i].meal_timer + philo[i].info->time_die)
 		{
@@ -32,6 +33,7 @@ void	thread_checker(t_philo *philo)
 			pthread_mutex_unlock(&philo[i].info->print_lock);
 			return ;
 		}
+		pthread_mutex_unlock(&philo->info->eat_lock);
 		if (i == philo[0].info->nbr_philos - 1)
 			i = 0;
 		if (philo[0].info->nbr_philos != 1)

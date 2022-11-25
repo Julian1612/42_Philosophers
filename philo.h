@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/17 19:07:49 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:47:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_info {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	fed_up_lock;
+	pthread_mutex_t	eat_lock;
 	pthread_mutex_t	wait_lock;
 }	t_info;
 
