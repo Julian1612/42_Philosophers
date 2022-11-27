@@ -6,13 +6,13 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
-#    Updated: 2022/11/27 14:36:28 by jschneid         ###   ########.fr        #
+#    Updated: 2022/11/27 18:05:13 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-FLAGS = -Wall -Werror -Wextra -pthread
+FLAGS = -Wall -Werror -Wextra -pthread -g
 # -fsanitize=thread
 
 SRC = ./src/main.c ./src/initialize.c ./src/join_destroy.c \

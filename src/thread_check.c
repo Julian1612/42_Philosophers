@@ -6,11 +6,29 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:46:44 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/27 15:08:16 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:22:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../philo.h"
+
+static int	death_check(t_philo philo)
+{
+	pthread_mutex_lock(&philo.info->timer_lock);
+	if (time_ms()
+		> philo.meal_timer + philo.info->time_die)
+	{
+		print_message('D', &philo);
+		pthread_mutex_lock(&philo.info->die_lock);
+		philo.info->die = 1;
+		pthread_mutex_unlock(&philo.info->die_lock);
+		pthread_mutex_unlock(&philo.info->print_lock);
+		pthread_mutex_unlock(&philo.info->timer_lock);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo.info->timer_lock);
+	return (0);
+}
 
 void	thread_checker(t_philo *philo)
 {
@@ -27,19 +45,8 @@ void	thread_checker(t_philo *philo)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->info->fed_up_lock);
-		pthread_mutex_lock(&philo[i].info->timer_lock);
-		if (time_ms()
-			> philo[i].meal_timer + philo[i].info->time_die)
-		{
-			print_message('D', &philo[i]);
-			pthread_mutex_lock(&philo[i].info->die_lock);
-			philo[i].info->die = 1;
-			pthread_mutex_unlock(&philo[i].info->die_lock);
-			pthread_mutex_unlock(&philo[i].info->print_lock);
-			pthread_mutex_unlock(&philo[i].info->timer_lock);
+		if (death_check(philo[i]))
 			break ;
-		}
-		pthread_mutex_unlock(&philo->info->timer_lock);
 		if (i == philo[0].info->nbr_philos - 1)
 			i = 0;
 		if (philo[0].info->nbr_philos != 1)
