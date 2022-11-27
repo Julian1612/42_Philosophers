@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_00.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 19:25:10 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/27 20:22:03 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:26:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	ft_atoi(const char *nptr)
 		num = 10 * num + (nptr[i] - 48);
 		i++;
 	}
-	return (num * sign);
+	if ((num * sign < 0) || (num * sign > INT_MAX))
+		return (-1);
+	else
+		return (num * sign);
 }
 
 unsigned long	time_ms(void)
