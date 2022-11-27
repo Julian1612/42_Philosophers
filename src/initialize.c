@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/24 16:47:39 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:31:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ t_info	*init_info(int argc, char **argv)
 	pthread_mutex_init(&info->print_lock, NULL);
 	pthread_mutex_init(&info->fed_up_lock, NULL);
 	pthread_mutex_init(&info->wait_lock, NULL);
-	pthread_mutex_init(&info->eat_lock, NULL);
+	pthread_mutex_init(&info->timer_lock, NULL);
+	pthread_mutex_init(&info->die_lock, NULL);
 	return (info);
 }
 

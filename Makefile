@@ -6,13 +6,14 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 17:23:51 by jschneid          #+#    #+#              #
-#    Updated: 2022/11/24 16:04:41 by jschneid         ###   ########.fr        #
+#    Updated: 2022/11/27 14:36:28 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread
+FLAGS = -Wall -Werror -Wextra -pthread
+# -fsanitize=thread
 
 SRC = ./src/main.c ./src/initialize.c ./src/join_destroy.c \
 ./src/parsing_00.c ./src/threads.c ./src/utils_00.c \
@@ -25,7 +26,6 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	@echo "$(BLUE)$(FETT)-_-COMPILING-_-$(RESET)"
 	@echo "\033[1;32mCompiling  \033[1;97m$< \033[1;0m"
 	@$(CC) $(FLAGS) -c $< -o $@
 

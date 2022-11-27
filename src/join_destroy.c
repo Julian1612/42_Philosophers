@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:38:16 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/17 19:05:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:13:52 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	join_threads(t_philo *philo)
 	}
 }
 
-void	destroy_threads(t_philo *philo)
+void	destroy_threads(t_philo *philo) //mutex!!!
 {
 	int	i;
 
@@ -41,6 +41,7 @@ void	destroy_threads(t_philo *philo)
 	pthread_mutex_destroy(&philo[0].info->print_lock);
 	pthread_mutex_destroy(&philo->info->wait_lock);
 	pthread_mutex_destroy(&philo->info->fed_up_lock);
+	pthread_mutex_destroy(&philo->info->die_lock);
 }
 
 void	free_structs(t_philo *philo, t_info *info)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 11:30:53 by jschneid          #+#    #+#             */
-/*   Updated: 2022/10/28 12:33:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 13:53:30 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	create_threads(t_info *info, t_philo *philo)
 {
-	int				i;
+	int	i;
 
 	if (init_forks(info))
 		return (-1);
@@ -27,7 +27,9 @@ int	create_threads(t_info *info, t_philo *philo)
 			return (-1);
 		i++;
 	}
+	pthread_mutex_lock(&philo->info->wait_lock);
 	info->philos_init = 1;
+	pthread_mutex_unlock(&philo->info->wait_lock);
 	usleep(50000);
 	return (0);
 }
