@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:07:27 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/17 19:08:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:30:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	thread_checker(philo);
 	join_threads(philo);
-	destroy_threads(philo);
+	destroy_mutex(philo);
 	free_structs(philo, info);
 	return (0);
 }

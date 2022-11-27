@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:03:30 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/27 16:56:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:30:17 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,23 @@ typedef struct s_info {
 	int				time_sleep;
 	int				max_meals;
 	int				philos_init;
-	int				wait_flag; //!
+	int				wait_flag;
 	int				fed_up;
-	int				die; //!
+	int				die;
 	int				created_threads;
-	unsigned long	time_start; //!
-	pthread_mutex_t	*forks; //!
+	unsigned long	time_start;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	fed_up_lock;
 	pthread_mutex_t	timer_lock;
 	pthread_mutex_t	die_lock;
-	// pthread_mutex_t	eat_lock;
 	pthread_mutex_t	wait_lock;
 }	t_info;
 
 typedef struct s_philo {
 	int				philo_id;
 	int				meal_counter;
-	unsigned long	meal_timer; //!
+	unsigned long	meal_timer;
 	pthread_t		thread;
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
@@ -56,7 +55,7 @@ int				init_forks(t_info *info);
 t_info			*init_info(int argc, char **argv);
 void			init_philo(t_info *info, t_philo *philo, int i);
 //-------------join_destroy--------------//
-void			destroy_threads(t_philo *philo);
+void			destroy_mutex(t_philo *philo);
 void			join_threads(t_philo *philo);
 void			free_structs(t_philo *philo, t_info *info);
 //----------------Parsing----------------//

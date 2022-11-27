@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:38:16 by jschneid          #+#    #+#             */
-/*   Updated: 2022/11/27 16:26:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:29:57 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	join_threads(t_philo *philo)
 	}
 }
 
-void	destroy_threads(t_philo *philo) //dest_mutex!!!
+void	destroy_mutex(t_philo *philo) //dest_mutex!!!
 {
 	int	i;
 
